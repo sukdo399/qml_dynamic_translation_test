@@ -6,7 +6,7 @@ Rectangle {
 
     Column {
         MyText {
-            text: qsTr("Hello") + rootItem.emptyString
+            text: "Hello"
         }
     }
 

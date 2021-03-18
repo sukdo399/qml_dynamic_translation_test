@@ -6,11 +6,12 @@ Item  {
     width: originText.implicitWidth
     height: originText.implicitHeight
 
-    property alias text: originText.text
+    property string text: ""
 
     Text {
         id: originText
         width: control.width
         height: control.height
+        text: qsTr(control.text) + rootItem.emptyString
     }
 }
