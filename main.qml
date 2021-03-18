@@ -5,9 +5,7 @@ Rectangle {
     width: 340; height: 150
 
     Column {
-        anchors.fill: parent; spacing: 20
         MyText {
-            id: htext
             text: qsTr("Hello") + rootItem.emptyString
         }
     }
