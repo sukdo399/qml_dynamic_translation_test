@@ -2,8 +2,6 @@
 #include <QQuickView>
 #include <QApplication>
 #include <QtQml>
-#include <QQmlEngine>
-#include <QDebug>
 
 class TranslationTest : public QObject {
 
@@ -22,7 +20,6 @@ public:
         return "";
     }
     Q_INVOKABLE void selectLanguage(QString language) {
-        qWarning() << "in c++ selectLanguage, lan: " + language;
         if(language == QString("fr")) {
             translator1->load("t1_fr", ".");
             qApp->installTranslator(translator1);
@@ -49,8 +46,6 @@ private:
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     TranslationTest myObj;
-//    QQmlEngine *engine = new QQmlEngine;
-
 
     QQuickView *view = new QQuickView;
     view->rootContext()->setContextProperty("rootItem", (QObject*)&myObj);

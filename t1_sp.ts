@@ -5,7 +5,7 @@
     <name>MyText</name>
     <message>
         <source>Hello</source>
-        <translation type="unfinished">sp</translation>
+        <translation type="unfinished">Hello in Spanish</translation>
     </message>
 </context>
 </TS>

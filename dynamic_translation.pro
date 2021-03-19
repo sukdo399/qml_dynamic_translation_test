@@ -16,13 +16,7 @@ DISTFILES += \
 QmlFiles.path = $$OUT_PWD
 QmlFiles.files += $$files($$PWD/*.qml)
 
-TsFiles.path = $$OUT_PWD
-TsFiles.files += $$files($$PWD/*.ts)
-
 QmFiles.path = $$OUT_PWD
 QmFiles.files += $$files($$PWD/*.qm)
 
-INSTALLS += QmlFiles TsFiles QmFiles
-
-
-
+INSTALLS += QmlFiles QmFiles
