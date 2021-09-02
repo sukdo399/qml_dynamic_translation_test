@@ -11,7 +11,11 @@ HEADERS += \
 DISTFILES += \
     MyText.qml \
     main.qml \
-    Button.qml
+    Button.qml \
+    t1_fr.qm \
+    t1_sp.qm
+
+TRANSLATIONS += t1_sp.ts t1_fr.ts
 
 QmlFiles.path = $$OUT_PWD
 QmlFiles.files += $$files($$PWD/*.qml)
