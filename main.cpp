@@ -3,42 +3,43 @@
 #include <QApplication>
 #include <QtQml>
 #include <QQmlApplicationEngine>
+#include <htranslator.h>
 
 class TranslationTest : public QObject {
 
     Q_OBJECT
 public:
     TranslationTest(QObject *parent = nullptr) : QObject(parent) {
-        translator1 = new QTranslator(this);
-        translator2 = new QTranslator(this);
+        translator = new HTranslator(this);
     }
     ~TranslationTest() {
-        delete translator1;
-        delete translator2;
+        delete translator;
     }
     Q_INVOKABLE void selectLanguage(QString language) {
         if(language == QString("fr")) {
-            qDebug() << "set fr";
-            translator1->load("t1_fr.qm", ".");
-            qApp->installTranslator(translator1);
+            translator->load("t1_fr.qm", ".");
+            qApp->installTranslator(translator);
         }
-        if(language == QString("sp")) {
-            qDebug() << "set sp";
-            translator2->load("t1_sp", ".");
-            qApp->installTranslator(translator2);
+        if(language == QString("ko")) {
+            translator->load("t1_ko", ".");
+            qApp->installTranslator(translator);
         }
         if(language == QString("en")) {
-            qDebug() << "set en";
-            qApp->removeTranslator(translator1);
-            qApp->removeTranslator(translator2);
+            qApp->removeTranslator(translator);
         }
-        qobject_cast<QQmlApplicationEngine*>(parent())->retranslate();
+        emit languageChanged();
+
+        // we do not want call qmlengine->retranslate() which re-evaluate all expressions
+        //qobject_cast<QQmlApplicationEngine*>(parent())->retranslate();
     }
+    Q_INVOKABLE QString getSourceText(const QString translatedText) {
+        return translator->getSourceText(translatedText);
+    }
+
 signals:
     void languageChanged();
 private:
-    QTranslator *translator1;
-    QTranslator *translator2;
+    HTranslator *translator;
 };
 
 #include "main.moc"
@@ -47,6 +48,10 @@ int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
     TranslationTest myObj(&engine);
+
+    // for test
+    myObj.selectLanguage("fr");
+
     engine.rootContext()->setContextProperty("rootItem", (QObject*)&myObj);
     const QUrl url(QStringLiteral("main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app,
