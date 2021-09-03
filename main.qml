@@ -11,16 +11,15 @@ Window {
 
         Column {
             MyText {
-                //% "Hello"
-                text: qsTrId("Hello")
+                text: qsTr("Hello")
             }
         }
 
         Row {
             anchors.verticalCenter: parent.verticalCenter
             Button { label: "English"; onClicked: rootItem.selectLanguage("en"); }
+            Button { label: "Spanish"; onClicked: rootItem.selectLanguage("sp"); }
             Button { label: "French"; onClicked: rootItem.selectLanguage("fr"); }
-            Button { label: "Korean"; onClicked: rootItem.selectLanguage("ko"); }
         }
     }
 }
