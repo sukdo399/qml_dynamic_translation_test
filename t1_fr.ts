@@ -2,11 +2,10 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
-    <name>main</name>
+    <name>MyText</name>
     <message>
-        <location filename="main.qml" line="11"/>
         <source>Hello</source>
-        <translation type="unfinished">fr</translation>
+        <translation type="unfinished">Hello in Franch</translation>
     </message>
 </context>
 </TS>

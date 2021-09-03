@@ -7,11 +7,12 @@ Item  {
     width: originText.implicitWidth
     height: originText.implicitHeight
 
-    property alias text: originText.text
+    property string text: ""
 
     T.Label {
         id: originText
         width: control.width
         height: control.height
+        text: qsTr(control.text) + rootItem.emptyString
     }
 }
