@@ -14,6 +14,9 @@ Window {
                 //% "Hello"
                 text: qsTrId("Hello")
             }
+            MyText {
+                text: "Bonjour"
+            }
         }
 
         Row {
