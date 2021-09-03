@@ -10,7 +10,7 @@ Window {
         width: 340; height: 150
 
         Column {
-            MyText {
+            Text {
                 text: qsTr("Hello")
             }
         }
