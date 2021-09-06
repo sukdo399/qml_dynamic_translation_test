@@ -13,6 +13,6 @@ Item  {
         id: originText
         width: control.width
         height: control.height
-        text: qsTr(control.text) + rootItem.emptyString
+        text: qsTrId(control.text) + rootItem.emptyString
     }
 }

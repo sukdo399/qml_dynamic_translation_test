@@ -13,6 +13,8 @@ DISTFILES += \
     main.qml \
     Button.qml
 
+TRANSLATIONS += t1_fr.ts t1_ko.ts
+
 QmlFiles.path = $$OUT_PWD
 QmlFiles.files += $$files($$PWD/*.qml)
 
