@@ -24,8 +24,8 @@ public:
             translator1->load("t1_fr", ".");
             qApp->installTranslator(translator1);
         }
-        if(language == QString("sp")) {
-            translator2->load("t1_sp", ".");
+        if(language == QString("ko")) {
+            translator2->load("t1_ko", ".");
             qApp->installTranslator(translator2);
         }
         if(language == QString("en")) {
@@ -46,6 +46,8 @@ private:
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     TranslationTest myObj;
+
+    myObj.selectLanguage("fr");
 
     QQuickView *view = new QQuickView;
     view->rootContext()->setContextProperty("rootItem", (QObject*)&myObj);

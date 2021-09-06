@@ -6,14 +6,15 @@ Rectangle {
 
     Column {
         MyText {
-            text: "Hello"
+            //% "Hello"
+            text: qsTrId("Hello") + rootItem.emptyString
         }
     }
 
     Row {
         anchors.verticalCenter: parent.verticalCenter
         Button { label: "English"; onClicked: rootItem.selectLanguage("en"); }
-        Button { label: "Spanish"; onClicked: rootItem.selectLanguage("sp"); }
+        Button { label: "Korean"; onClicked: rootItem.selectLanguage("ko"); }
         Button { label: "French"; onClicked: rootItem.selectLanguage("fr"); }
     }
 }
