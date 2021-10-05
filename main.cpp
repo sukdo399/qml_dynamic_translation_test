@@ -2,13 +2,11 @@
 #include <QQuickView>
 #include <QApplication>
 #include <QtQml>
-#include <QQmlEngine>
-#include <QDebug>
+#include <QQmlApplicationEngine>
 
 class TranslationTest : public QObject {
 
     Q_OBJECT
-    Q_PROPERTY(QString emptyString READ getEmptyString NOTIFY languageChanged)
 public:
     TranslationTest(QObject *parent = nullptr) : QObject(parent) {
         translator1 = new QTranslator(this);
@@ -18,24 +16,23 @@ public:
         delete translator1;
         delete translator2;
     }
-    QString getEmptyString() {
-        return "";
-    }
     Q_INVOKABLE void selectLanguage(QString language) {
-        qWarning() << "in c++ selectLanguage, lan: " + language;
         if(language == QString("fr")) {
-            translator1->load("t1_fr", ".");
+            qDebug() << "set fr";
+            translator1->load("t1_fr.qm", ".");
             qApp->installTranslator(translator1);
         }
         if(language == QString("sp")) {
+            qDebug() << "set sp";
             translator2->load("t1_sp", ".");
             qApp->installTranslator(translator2);
         }
         if(language == QString("en")) {
+            qDebug() << "set en";
             qApp->removeTranslator(translator1);
             qApp->removeTranslator(translator2);
         }
-        emit languageChanged();
+        qobject_cast<QQmlApplicationEngine*>(parent())->retranslate();
     }
 signals:
     void languageChanged();
@@ -47,14 +44,17 @@ private:
 #include "main.moc"
 
 int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
-    TranslationTest myObj;
-//    QQmlEngine *engine = new QQmlEngine;
+    QGuiApplication app(argc, argv);
+    QQmlApplicationEngine engine;
+    TranslationTest myObj(&engine);
+    engine.rootContext()->setContextProperty("rootItem", (QObject*)&myObj);
+    const QUrl url(QStringLiteral("main.qml"));
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app,
+                     [url](QObject *obj, const QUrl &objUrl) {
+                         if (!obj && url == objUrl) QCoreApplication::exit(-1);
+                     },
+                     Qt::QueuedConnection);
+    engine.load(url);
 
-
-    QQuickView *view = new QQuickView;
-    view->rootContext()->setContextProperty("rootItem", (QObject*)&myObj);
-    view->setSource(QUrl::fromLocalFile("main.qml"));
-    view->show();
     return app.exec();
 }

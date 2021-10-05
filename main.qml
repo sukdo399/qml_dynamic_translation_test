@@ -1,21 +1,26 @@
 import QtQuick 2.15
+import QtQuick.Window 2.12
+import QtQuick.Controls 2.12
 
-Rectangle {
-    id: rect
-    width: 340; height: 150
+Window {
+    visible: true
+    width: 1920
+    height: 720-106
+    Rectangle {
+        id: rect
+        width: 340; height: 150
 
-    Column {
-        anchors.fill: parent; spacing: 20
-        MyText {
-            id: htext
-            text: qsTr("Hello") + rootItem.emptyString
+        Column {
+            Text {
+                text: qsTr("Hello")
+            }
         }
-    }
 
-    Row {
-        anchors.verticalCenter: parent.verticalCenter
-        Button { label: "English"; onClicked: rootItem.selectLanguage("en"); }
-        Button { label: "Spanish"; onClicked: rootItem.selectLanguage("sp"); }
-        Button { label: "French"; onClicked: rootItem.selectLanguage("fr"); }
+        Row {
+            anchors.verticalCenter: parent.verticalCenter
+            Button { text: "English"; onClicked: rootItem.selectLanguage("en"); }
+            Button { text: "Spanish"; onClicked: rootItem.selectLanguage("sp"); }
+            Button { text: "French"; onClicked: rootItem.selectLanguage("fr"); }
+        }
     }
 }

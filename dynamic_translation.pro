@@ -9,20 +9,16 @@ SOURCES += \
 HEADERS += \
 
 DISTFILES += \
-    MyText.qml \
     main.qml \
-    Button.qml
+    t1_fr.qm \
+    t1_sp.qm
+
+TRANSLATIONS += t1_sp.ts t1_fr.ts
 
 QmlFiles.path = $$OUT_PWD
 QmlFiles.files += $$files($$PWD/*.qml)
 
-TsFiles.path = $$OUT_PWD
-TsFiles.files += $$files($$PWD/*.ts)
-
 QmFiles.path = $$OUT_PWD
 QmFiles.files += $$files($$PWD/*.qm)
 
-INSTALLS += QmlFiles TsFiles QmFiles
-
-
-
+INSTALLS += QmlFiles QmFiles
