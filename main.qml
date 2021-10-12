@@ -21,6 +21,10 @@ Window {
                     text: qsTr("Hello")
                 }
             }
+
+            Text {
+                text: "MyHello"
+            }
         }
 
         Row {
